@@ -1,5 +1,6 @@
 context = canvas.getContext('2d')
 canvas.addEventListener('click', clickHandler)
+canvas.addEventListener('mousemove', clickHandler)
 spots = []
 function clickHandler(event) {
   var x = event.offsetX,
@@ -22,4 +23,4 @@ function drawSpots(){
   spots.forEach(draw)
   spots = spots.filter(spot=>spot.light<101)
 }
-setInterval(drawSpots, 2000)
+setInterval(drawSpots, 40)
