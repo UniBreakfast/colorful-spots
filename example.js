@@ -1,7 +1,18 @@
 context = canvas.getContext('2d')
+spots = []
+
+document.body.style.margin = 0
+canvas.style.display = 'block'
 canvas.addEventListener('click', clickHandler)
 canvas.addEventListener('mousemove', clickHandler)
-spots = []
+
+onresize()
+
+function onresize() {
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+}
+
 function clickHandler(event) {
   var x = event.offsetX,
       y = event.offsetY,
@@ -12,6 +23,7 @@ function clickHandler(event) {
   spots.push(spot)
   draw(spot)
 }
+
 function draw(spot){
   spot.light+=0.5
   context.beginPath()
@@ -19,8 +31,10 @@ function draw(spot){
   context.arc(spot.x, spot.y, spot.r++, 0, 2 * Math.PI)
   context.fill()
 }
+
 function drawSpots(){
   spots.forEach(draw)
   spots = spots.filter(spot=>spot.light<101)
 }
+
 setInterval(drawSpots, 40)
